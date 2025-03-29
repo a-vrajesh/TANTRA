@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Next-Level Login Design</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: white;
+            overflow: hidden;
+        }
+
+        .login-container {
+            width: 750px;
+            height: 420px;
+            background: linear-gradient(145deg, #00264d, #0a0a0a);
+            border-radius: 15px;
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.9), -5px -5px 15px rgba(0, 47, 95, 0.5);
+            overflow: hidden;
+            display: flex;
+            position: relative;
+        }
+
+        .overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1;
+        }
+
+        .left-section {
+            flex: 1;
+            padding: 20px 40px 20px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            z-index: 2;
+            position: relative;
+            color: #fff;
+            background: linear-gradient(145deg, #0057ad, #003e79);
+            box-shadow: inset 5px 5px 15px rgba(0, 0, 0, 0.8), inset -5px -5px 15px rgba(0, 47, 95, 0.5);
+        }
+
+        .left-section h1 {
+            font-size: 30px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            background: #ffffff;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .left-section h6 {
+            font-size: 13px;
+            margin-bottom: 10px;
+            color: #b6b6b6;
+            font-weight: 100;
+        }
+
+        .left-section h6 span {
+            font-size: 15px;
+            color: rgb(255, 124, 124);
+        }
+
+        .left-section form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .left-section form label {
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        .left-section form label span {
+            color: rgb(255, 124, 124);
+        }
+
+        .left-section form input {
+            padding: 12px;
+            margin-bottom: 20px;
+            border: none;
+            border-radius: 5px;
+            background: #212a52;
+            color: white;
+            font-size: 14px;
+            outline: none;
+            transition: transform 0.2s;
+            box-shadow: inset 3px 3px 10px rgba(0, 0, 0, 0.8), inset -3px -3px 20px rgba(0, 72, 145, 0.5);
+        }
+
+        .left-section form input:focus {
+            transform: scale(1.05);
+            background: #223344;
+        }
+
+        .login-button {
+            padding: 12px;
+            background: linear-gradient(#0074d9, #004c99);
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.5s;
+            box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.9), -3px -3px 10px rgba(0, 47, 95, 0.5);
+        }
+
+        .login-button:hover {
+            transform: translateY(-2px);
+        }
+
+        .additional-options {
+            font-size: 16px;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .additional-options a {
+            color: #b6b6b6;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .additional-options a:hover {
+            color: #66c2ff;
+        }
+
+        .additional-options-forgot {
+            font-size: 16px;
+            text-align: right;
+            margin-top: 20px;
+        }
+
+        .additional-options-forgot a {
+            color: #b6b6b6;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .additional-options-forgot a:hover {
+            color: #66c2ff;
+        }
+
+        .logo-section {
+            flex: 1;
+            background: linear-gradient(145deg, #0057ad, #003e79);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            padding: 40px;
+            z-index: 2;
+            text-align: center;
+            box-shadow: inset 5px 5px 15px rgba(0, 0, 0, 0.8), inset -5px -5px 15px rgba(0, 47, 95, 0.5);
+        }
+
+        .logo-section h2 {
+            font-size: 34px;
+            margin-bottom: 10px;
+            text-shadow: 0 0 20px #ffffff;
+            animation: glow 1.5s infinite alternate;
+        }
+
+        .logo-section img {
+            height: 42px;
+            width: 211.5px;
+        }
+
+        .logo-section p {
+            font-size: 16px;
+            line-height: 1.8;
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 10px rgba(0, 0, 50, 0.99), 0 0 25px rgba(0, 0, 50, 0.6);
+            }
+
+            to {
+                text-shadow: 0 0 25px rgb(0, 0, 50), 0 0 40px rgba(0, 0, 50, 0.99);
+            }
+        }
+
+        #error-message {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background-color: rgba(255, 0, 0, 0.8);
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            display: none;
+            animation: fadeOut 5s forwards;
+        }
+
+        .error-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .error-content span {
+            margin-right: 10px;
+        }
+
+        .close-btn {
+            cursor: pointer;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="login-container">
+        <div class="overlay"></div>
+        <div class="logo-section">
+            <!-- <h2>TANTRA</h2> -->
+            <img src="./Logo.png" alt="TANTRA Logo">
+        </div>
+        <div class="left-section">
+            <h1>Login</h1>
+            <!-- <h6><span>*</span> are mandatory fields</h6> -->
+            <form action="#" id="loginForm" method="post">
+                <!-- <label for="username">Username<span>*</span></label> -->
+                <input type="text" id="username" placeholder="Enter your username" oninput="verifyBlankData(this)" />
+
+                <!-- <label for="password">Password<span>*</span></label> -->
+                <input type="password" id="password" placeholder="Enter your password" oninput="verifyBlankData(this)" />
+
+                <button type="submit" class="login-button">Login</button>
+            </form>
+            <div class="additional-options-forgot">
+                <a href="./Forgot.html">Forgot Password</a>
+            </div>
+            <div class="additional-options">
+                Don't have an account? <a href="#">Sign Up</a><br>
+            </div>
+        </div>
+    </div>
+    <div id="error-message">
+        <div class="error-content">
+            <span id="error-text"></span>
+            <button class="close-btn" onclick="hideError()">X</button>
+        </div>
+    </div>
+    <script>
+        let errorTimeout;
+
+        document.getElementById('loginForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value.trim();
+            const errorMessage = document.getElementById('error-message');
+            const errorText = document.getElementById('error-text');
+
+            if (!username && password) {
+                errorText.textContent = 'Username is required!';
+                document.getElementById('username').style.background = 'rgba(255, 0, 0, 0.500)';
+                errorMessage.style.display = 'block';
+
+                clearTimeout(errorTimeout);
+                errorTimeout = setTimeout(() => {
+                    errorMessage.style.display = 'none';
+                }, 5000);
+
+                return;
+            } else if (username && !password) {
+                errorText.textContent = 'Password is required!';
+                document.getElementById('password').style.background = 'rgba(255, 0, 0, 0.500)';
+                errorMessage.style.display = 'block';
+
+                clearTimeout(errorTimeout);
+                errorTimeout = setTimeout(() => {
+                    errorMessage.style.display = 'none';
+                }, 5000);
+
+                return;
+            } else if (!username && !password) {
+                errorText.textContent = 'Both fields are required!';
+                document.getElementById('username').style.background = 'rgba(255, 0, 0, 0.500)';
+                document.getElementById('password').style.background = 'rgba(255, 0, 0, 0.500)';
+                errorMessage.style.display = 'block';
+
+                clearTimeout(errorTimeout);
+                errorTimeout = setTimeout(() => {
+                    errorMessage.style.display = 'none';
+                }, 5000);
+
+                return;
+            }
+
+            alert('Login successful!');
+        });
+
+        function hideError() {
+            const errorMessage = document.getElementById('error-message');
+            errorMessage.style.display = 'none';
+            clearTimeout(errorTimeout);
+        }
+
+        function verifyBlankData(InputData) {
+            const identifier = InputData.value.trim();
+            if (!identifier) {
+                InputData.style.background = 'rgba(255, 0, 0, 0.500)';
+            }
+            else {
+                InputData.style.background = '#212a52';
+            }
+        }
+    </script>
+</body>
+
+</html>

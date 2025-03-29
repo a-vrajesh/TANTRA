@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 equal columns */
+  grid-template-rows: repeat(6, auto);  /* 6 rows */
+  gap: 10px; /* Optional: Adds spacing */
+}
+
+.box {
+  background: lightblue;
+  padding: 10px;
+  text-align: center;
+}
+
+.last-row {
+  grid-column: span 2; /* Each box spans 1.5 columns */
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="box">Row 1 Col 1</div>
+        <div class="box">Row 1 Col 2</div>
+        <div class="box">Row 1 Col 3</div>
+        
+        <div class="box">Row 2 Col 1</div>
+        <div class="box">Row 2 Col 2</div>
+        <div class="box">Row 2 Col 3</div>
+        
+        <div class="box">Row 3 Col 1</div>
+        <div class="box">Row 3 Col 2</div>
+        <div class="box">Row 3 Col 3</div>
+      
+        <div class="box">Row 4 Col 1</div>
+        <div class="box">Row 4 Col 2</div>
+        <div class="box">Row 4 Col 3</div>
+      
+        <div class="box">Row 5 Col 1</div>
+        <div class="box">Row 5 Col 2</div>
+        <div class="box">Row 5 Col 3</div>
+      
+        <!-- Last Row: Only 2 values divided into 3 columns -->
+        <div class="box last-row">Row 6 Col 1 & 2</div>
+        <div class="box last-row">Row 6 Col 3</div>
+      </div>
+      
+</body>
+</html>
